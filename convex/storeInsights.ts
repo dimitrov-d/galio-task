@@ -3,7 +3,14 @@ import { mutation, query } from "./_generated/server";
 import { storeInsightsFields } from "./schema";
 
 export const getStoreInsights = query({
-  returns: v.union(v.object(storeInsightsFields), v.null()),
+  returns: v.union(
+    v.object({
+      ...storeInsightsFields,
+      _id: v.id("storeInsights"),
+      _creationTime: v.number(),
+    }),
+    v.null(),
+  ),
   handler: async (ctx) => await ctx.db.query("storeInsights").first(),
 });
 
