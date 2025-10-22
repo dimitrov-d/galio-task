@@ -1,14 +1,17 @@
+"use client";
+
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
+import Link from "next/link";
 
-export default function App() {
+export default function Home() {
   return (
     <>
-      <header className="sticky top-0 z-10 bg-light dark:bg-dark p-4 border-b-2 border-slate-200 dark:border-slate-800">
-        Convex + React
+      <header className="sticky top-0 z-10 bg-background p-4 border-b-2 border-slate-200 dark:border-slate-800 flex flex-row justify-between items-center">
+        Convex + Next.js
       </header>
       <main className="p-8 flex flex-col gap-16">
-        <h1 className="text-4xl font-bold text-center">Convex + React</h1>
+        <h1 className="text-4xl font-bold text-center">Convex + Next.js</h1>
         <Content />
       </main>
     </>
@@ -39,7 +42,7 @@ function Content() {
       </p>
       <p>
         <button
-          className="bg-dark dark:bg-light text-light dark:text-dark text-sm px-4 py-2 rounded-md border-2"
+          className="bg-foreground text-background text-sm px-4 py-2 rounded-md"
           onClick={() => {
             void addNumber({ value: Math.floor(Math.random() * 10) });
           }}
@@ -51,7 +54,7 @@ function Content() {
         Numbers:{" "}
         {numbers?.length === 0
           ? "Click the button!"
-          : (numbers?.join(", ") ?? "...")}
+          : numbers?.join(", ") ?? "..."}
       </p>
       <p>
         Edit{" "}
@@ -63,9 +66,16 @@ function Content() {
       <p>
         Edit{" "}
         <code className="text-sm font-bold font-mono bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded-md">
-          src/App.tsx
+          app/page.tsx
         </code>{" "}
         to change your frontend
+      </p>
+      <p>
+        See the{" "}
+        <Link href="/server" className="underline hover:no-underline">
+          /server route
+        </Link>{" "}
+        for an example of loading data in a server component
       </p>
       <div className="flex flex-col">
         <p className="text-lg font-bold">Useful resources:</p>
