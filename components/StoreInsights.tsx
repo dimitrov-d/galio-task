@@ -82,8 +82,7 @@ export default function StoreInsights() {
               ? "bg-[#013213] border-[#00FE5D]/30"
               : "bg-[#013213] border-[#00FE5D]/20"
               }`}>
-              <p className={`text-xs uppercase tracking-wide font-medium ${theme === "light" ? "text-[#E6FEF9]/50" : "text-[#E6FEF9]/50"
-                }`}>
+              <p className={`text-xs uppercase tracking-wide font-medium text-[#E6FEF9]/50`}>
                 Powered by
               </p>
               <p className={`text-xl font-bold text-[#E6FEF9]`}>
