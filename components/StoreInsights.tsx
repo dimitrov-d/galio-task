@@ -103,7 +103,7 @@ export default function StoreInsights() {
                 Last campaign: {formatDate(insights.lastCampaignDate)}
               </p>
             </div>
-            <div className={`px-4 py-2 rounded-lg border transition-colors ${theme === "light"
+            <div className={`hidden md:block px-4 py-2 rounded-lg border transition-colors ${theme === "light"
               ? "bg-[#013213] border-[#00FE5D]/30"
               : "bg-[#013213] border-[#00FE5D]/20"
               }`}>
@@ -207,7 +207,7 @@ export default function StoreInsights() {
             </div>
           </div>
 
-          <div className="mt-8">
+          <div className="hidden md:block mt-8">
             {insights.chartData ? (
               <PerformanceChart data={insights.chartData} />
             ) : (
