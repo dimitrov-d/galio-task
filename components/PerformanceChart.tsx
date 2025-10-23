@@ -115,10 +115,10 @@ export default function PerformanceChart({ data }: PerformanceChartProps) {
               yAxisId="right"
               type="monotone"
               dataKey="openRate"
-              stroke="#013213"
+              stroke={theme === "light" ? "#013213" : "#FFFFFF"}
               strokeWidth={3}
-              dot={{ fill: "#013213", strokeWidth: 2, r: 4 }}
-              activeDot={{ r: 6, stroke: "#013213", strokeWidth: 2 }}
+              dot={{ fill: theme === "light" ? "#013213" : "#FFFFFF", strokeWidth: 2, r: 4 }}
+              activeDot={{ r: 6, stroke: theme === "light" ? "#013213" : "#FFFFFF", strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -127,14 +127,14 @@ export default function PerformanceChart({ data }: PerformanceChartProps) {
       <div className="mt-4 flex justify-center gap-6">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#00FE5D]" />
-          <span className={`text-sm ${theme === "light" ? "text-[#013213]/70" : "text-[#E6FEF9]/70"
+          <span className={`text-sm font-bold ${theme === "light" ? "text-[#013213]" : "text-[#E6FEF9]"
             }`}>
             Campaigns
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#013213]" />
-          <span className={`text-sm ${theme === "light" ? "text-[#013213]/70" : "text-[#E6FEF9]/70"
+          <div className={`w-3 h-3 rounded-full ${theme === "light" ? "bg-[#013213]" : "bg-[#FFFFFF]"}`} />
+          <span className={`text-sm font-bold ${theme === "light" ? "text-[#013213]" : "text-[#E6FEF9]"
             }`}>
             Open Rate (%)
           </span>
