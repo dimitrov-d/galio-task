@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
+import posthog from "posthog-js";
 import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import { api } from "../convex/_generated/api";
@@ -22,6 +23,13 @@ export default function StoreInsights() {
       return () => clearTimeout(timer);
     }
   }, [insights]);
+
+  useEffect(() => {
+    posthog?.capture('widget_viewed', {
+      widget_type: 'store_insights',
+      timestamp: Date.now(),
+    });
+  }, [posthog]);
 
   if (!insights) {
     return (

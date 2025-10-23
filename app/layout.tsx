@@ -1,4 +1,5 @@
 import ConvexClientProvider from "@/components/ConvexClientProvider";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -75,7 +76,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${gotag.variable} antialiased`}
       >
         <ThemeProvider>
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <ConvexClientProvider>
+            <PostHogProvider>
+              {children}
+            </PostHogProvider>
+          </ConvexClientProvider>
         </ThemeProvider>
       </body>
     </html>
