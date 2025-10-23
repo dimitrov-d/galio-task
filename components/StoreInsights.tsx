@@ -16,10 +16,9 @@ export default function StoreInsights() {
   const seedDemoData = useMutation(api.storeInsights.seedDemoData);
   const updateExistingData = useMutation(api.storeInsights.updateExistingData);
 
-
   useEffect(() => {
     if (insights) {
-      const timer = setTimeout(() => setIsLoading(false), 1500);
+      const timer = setTimeout(() => setIsLoading(false), 2000);
       return () => clearTimeout(timer);
     }
   }, [insights]);
@@ -30,6 +29,10 @@ export default function StoreInsights() {
       timestamp: Date.now(),
     });
   }, [posthog]);
+
+  if (!insights || isLoading) {
+    return <SkeletonInsights storeName={insights?.storeName} lastCampaignDate={insights?.lastCampaignDate} />;
+  }
 
   if (!insights) {
     return (
@@ -57,10 +60,6 @@ export default function StoreInsights() {
         </div>
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <SkeletonInsights storeName={insights?.storeName} lastCampaignDate={insights?.lastCampaignDate} />;
   }
 
   const formatCurrency = (amount: number) =>

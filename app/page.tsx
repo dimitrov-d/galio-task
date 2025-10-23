@@ -5,10 +5,21 @@ import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 
 export default function Home() {
-  const { theme } = useTheme();
+  const { theme, isThemeLoaded } = useTheme();
+
+  if (!isThemeLoaded) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a1612] via-[#050d0a] to-[#0a1612] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-[#00FE5D]/20 border-t-[#00FE5D] rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[#E6FEF9]/50 text-sm">Loading Galio Dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div className="animate-fadeIn">
       <header className={`sticky top-0 z-10 p-6 shadow-lg border-b flex flex-row justify-between items-center backdrop-blur-sm transition-colors ${theme === "light"
         ? "bg-white border-[#00FE5D]/20"
         : "bg-[#0a1612] border-[#00FE5D]/10"
@@ -49,7 +60,7 @@ export default function Home() {
           <StoreInsights />
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
