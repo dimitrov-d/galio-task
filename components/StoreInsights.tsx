@@ -4,13 +4,17 @@ import { useMutation, useQuery } from "convex/react";
 import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import { api } from "../convex/_generated/api";
+import PerformanceChart from "./PerformanceChart";
 import { SkeletonInsights } from "./SkeletonLoader";
 
 export default function StoreInsights() {
-  const insights = useQuery(api.storeInsights.getStoreInsights);
-  const seedDemoData = useMutation(api.storeInsights.seedDemoData);
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
+
+  const insights = useQuery(api.storeInsights.getStoreInsights);
+  const seedDemoData = useMutation(api.storeInsights.seedDemoData);
+  const updateExistingData = useMutation(api.storeInsights.updateExistingData);
+
 
   useEffect(() => {
     if (insights) {
@@ -194,6 +198,34 @@ export default function StoreInsights() {
                 <div className="text-6xl">🏆</div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-8">
+            {insights.chartData ? (
+              <PerformanceChart data={insights.chartData} />
+            ) : (
+              <div className={`rounded-xl p-6 border shadow-sm ${theme === "light"
+                ? "bg-white border-[#00FE5D]/20"
+                : "bg-[#013213] border-[#00FE5D]/10"
+                }`}>
+                <div className="text-center py-8">
+                  <h3 className={`text-xl font-bold mb-4 ${theme === "light" ? "text-[#013213]" : "text-[#E6FEF9]"
+                    }`}>
+                    Chart Data Missing
+                  </h3>
+                  <p className={`mb-6 ${theme === "light" ? "text-[#013213]/50" : "text-[#E6FEF9]/50"
+                    }`}>
+                    Update your data to see the performance chart
+                  </p>
+                  <button
+                    onClick={() => updateExistingData()}
+                    className="bg-[#00FE5D] hover:bg-[#00FE5D]/90 text-[#013213] font-bold px-6 py-3 rounded-lg transition-all duration-200 shadow-lg shadow-[#00FE5D]/10 hover:shadow-[#00FE5D]/20"
+                  >
+                    Update Data
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
