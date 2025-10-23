@@ -1,13 +1,23 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import { api } from "../convex/_generated/api";
+import { SkeletonInsights } from "./SkeletonLoader";
 
 export default function StoreInsights() {
   const insights = useQuery(api.storeInsights.getStoreInsights);
   const seedDemoData = useMutation(api.storeInsights.seedDemoData);
   const { theme } = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (insights) {
+      const timer = setTimeout(() => setIsLoading(false), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [insights]);
 
   if (!insights) {
     return (
@@ -35,6 +45,10 @@ export default function StoreInsights() {
         </div>
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <SkeletonInsights storeName={insights?.storeName} lastCampaignDate={insights?.lastCampaignDate} />;
   }
 
   const formatCurrency = (amount: number) =>
