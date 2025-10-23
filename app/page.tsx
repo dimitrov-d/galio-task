@@ -14,7 +14,11 @@ export default function Home() {
         : "bg-[#0a1612] border-[#00FE5D]/10"
         }`}>
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Galio Logo" className="w-8 h-8" />
+          <img
+            src={theme === "light" ? "/logo-dark.png" : "/logo.png"}
+            alt="Galio Logo"
+            className="w-8 h-8"
+          />
           <div>
             <h1 className={`text-2xl font-bold ${theme === "light" ? "text-[#013213]" : "text-[#E6FEF9]"
               }`}>
