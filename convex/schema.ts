@@ -10,6 +10,16 @@ export const storeInsightsFields = {
   timeSavedHours: v.number(),
   lastCampaignDate: v.number(),
   activeEmailsThisMonth: v.number(),
+  chartData: v.optional(
+    v.array(
+      v.object({
+        month: v.string(),
+        campaigns: v.number(),
+        openRate: v.number(),
+        revenue: v.number(),
+      }),
+    ),
+  ),
 };
 
 export default defineSchema({
